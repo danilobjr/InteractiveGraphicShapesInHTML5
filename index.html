@@ -12,10 +12,21 @@
   <canvas id="canvas" width="100" height="100"></canvas>
   <img class="component-img" src="img/ram_memory_1.png" alt="ram_memory_1">
 
+  <form>
+    <input type="text" name="component" placeholder="Component name">
+    <input type="submit" value="Add">
+  </form>
+
   <!-- libs -->
   <script src="js/libs/jquery.min.js"></script>
   <script src="js/libs/fabric.min.js"></script>
 
-  <script src="js/app/app.js"></script>
+  <!-- app -->
+  <script src="js/app/extensions/fabric.extensions.js"></script>
+  <script src="js/app/_namespace.js"></script>
+  <script src="js/app/shapeFactory.js"></script>
+  <script src="js/app/view.js"></script>
+  <script src="js/app/controller.js"></script>
+  <script src="js/app/main.js"></script>
 </body>
 </html>
