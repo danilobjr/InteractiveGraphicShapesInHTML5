@@ -10,11 +10,11 @@ fabric.Image.prototype.setWidthProportionally = function (newWidth) {
 fabric.Object.prototype.bindTo = function (htmlElement) {
     this.boundHtmlElement = htmlElement;
 
-    this.boundHtmlElement.attr('data-left', this.getLeft());
-    this.boundHtmlElement.attr('data-top', this.getTop());
-    this.boundHtmlElement.attr('data-scale-y', this.getScaleY());
-    this.boundHtmlElement.attr('data-scale-x', this.getScaleX());
-    this.boundHtmlElement.attr('data-angle', this.getAngle());
+    htmlElement.setAttribute('data-left', this.getLeft());
+    htmlElement.setAttribute('data-top', this.getTop());
+    htmlElement.setAttribute('data-scale-y', this.getScaleY());
+    htmlElement.setAttribute('data-scale-x', this.getScaleX());
+    htmlElement.setAttribute('data-angle', this.getAngle());
 
     this.on('moving', this.updateBoundElement);
     this.on('scaling', this.updateBoundElement);
@@ -23,11 +23,11 @@ fabric.Object.prototype.bindTo = function (htmlElement) {
 };
 
 fabric.Object.prototype.updateBoundElement = function () {
-    this.boundHtmlElement.attr('data-left', this.getLeft());
-    this.boundHtmlElement.attr('data-top', this.getTop());
-    this.boundHtmlElement.attr('data-scale-y', this.getScaleY());
-    this.boundHtmlElement.attr('data-scale-x', this.getScaleX());
-    this.boundHtmlElement.attr('data-angle', this.getAngle());
+    this.boundHtmlElement.setAttribute('data-left', this.getLeft());
+    this.boundHtmlElement.setAttribute('data-top', this.getTop());
+    this.boundHtmlElement.setAttribute('data-scale-y', this.getScaleY());
+    this.boundHtmlElement.setAttribute('data-scale-x', this.getScaleX());
+    this.boundHtmlElement.setAttribute('data-angle', this.getAngle());
 
-    console.log(this.boundHtmlElement.data().top);
+    console.log(this.boundHtmlElement.getAttribute('data-top'));
 };

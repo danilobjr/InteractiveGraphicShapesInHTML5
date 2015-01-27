@@ -25,7 +25,7 @@
                 .addRectangle({
                     fill: 'red'
                 })
-                .bindTo(hiddenField);
+                .bindTo(hiddenField.get(0));
 
             _view.form.reset();
 

@@ -95,10 +95,12 @@
             var imgElement = $(_backgroundSettings.imgHtmlElementSelector).get(0);
 
             fabric.Image.fromURL(imgElement.src, function(background) {
+                background.selectable = false;
                 background.setWidthProportionally(_backgroundSettings.width);
 
                 _canvas.setWidth(background.getWidth());
                 _canvas.setHeight(background.getHeight());
+
                 _canvas.add(background);
             });
         }
