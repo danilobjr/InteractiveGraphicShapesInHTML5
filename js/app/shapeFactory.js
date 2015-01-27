@@ -6,6 +6,18 @@
         var _backgroundSettings = undefined;
         var _canvasElementId = 'canvas';
         var _canvas = undefined;
+        var _zoomScale = 0.4;
+        var _panActive = true;
+
+        var defaultShapeSettings = {
+            fill: '#D6D5EB',
+            // fill: 'white',
+            opacity: 0.8,
+            borderColor: 'red',
+            cornerColor: 'green',
+            cornerSize: 6,
+            transparentCorners: false
+        };
 
         var _factoryApi = {
             elementId: setCanvasElementId,
@@ -31,9 +43,12 @@
 
         function init() {
             _canvas = new fabric.Canvas(_canvasElementId);
+
             renderBackground();
 
             var _api = {
+                zoomIn: zoomIn,
+                zoomOut: zoomOut,
                 addRectangle: addRectangle
             };
 
@@ -41,45 +56,51 @@
 
             ////////////
 
+            function zoomIn() {
+                var currentZoomLevel = _canvas.getZoom();
+                _canvas.setZoom(currentZoomLevel + _zoomScale);
+            }
+
+            function zoomOut() {
+                var currentZoomLevel = _canvas.getZoom();
+                _canvas.setZoom(currentZoomLevel - _zoomScale);
+            }
+
             function addRectangle(settings) {
 
-                var defaultSettings = {
+                var defaultRectangleSettings = {
                     width: 50,
-                    height: 50,
-                    fill: '#D6D5EB',
-                    // fill: 'white',
-                    opacity: 0.8
+                    height: 50
                 };
 
-                settings = $.extend({}, defaultSettings, settings);
+                settings = $.extend({}, defaultShapeSettings, defaultRectangleSettings, settings);
 
                 var rectangle = new fabric.Rect(settings);
-
-                _canvas.add(rectangle);
-
-                rectangle.center();
-                rectangle.setCoords();
-
-                _canvas.renderAll();
+                addToCanvas(rectangle);
 
                 return rectangle;
+            }
+
+            function addToCanvas(shape) {
+                _canvas.add(shape);
+
+                shape.center();
+                shape.setCoords();
+
+                _canvas.renderAll();
             }
         }
 
         function renderBackground() {
             var imgElement = $(_backgroundSettings.imgHtmlElementSelector).get(0);
 
-            var background = new fabric.Image(imgElement, {
-                left: 0,
-                top: 0,
-                'selectable': false,
+            fabric.Image.fromURL(imgElement.src, function(background) {
+                background.setWidthProportionally(_backgroundSettings.width);
+
+                _canvas.setWidth(background.getWidth());
+                _canvas.setHeight(background.getHeight());
+                _canvas.add(background);
             });
-
-            background.setWidthProportionally(_backgroundSettings.width);
-
-            _canvas.setWidth(background.getWidth());
-            _canvas.setHeight(background.getHeight());
-            _canvas.add(background);
         }
     };
 }(window));
