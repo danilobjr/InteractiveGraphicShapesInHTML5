@@ -1,0 +1,4 @@
+1. Zoom de imagem implica em zoom de todos os shapes.
+1.2. Como linkar referências de posição e dimensão para shapes ao aplicar zoom?
+1.3. Como aplicar pan numa imagem com zoom preservando as referências de posição e dimensão?
+2. Aplicar cor aos shapes.
